@@ -1,0 +1,33 @@
+2016-04-11 13:28:57 - PSTParser started
+2016-04-11 13:28:57 - [Kymaera] modules [], plugins [], sites []
+2016-04-11 13:28:58 - Main loop exception
+java.lang.NullPointerException
+	at com.rfg.pstparser.PSTParser.processFolder(PSTParser.java:86) [classes/:?]
+	at com.rfg.pstparser.PSTParser.<init>(PSTParser.java:81) [classes/:?]
+	at com.rfg.pstparser.PSTParser.main(PSTParser.java:333) [classes/:?]
+2016-04-11 13:28:58 - PSTParser ended
+2016-04-11 13:30:02 - PSTParser started
+2016-04-11 13:30:02 - [Ankhi] modules [], plugins [], sites []
+2016-04-11 13:30:03 - Processing parser.pst
+2016-04-11 13:30:09 - Sending 7 item to ElasticSearch
+2016-04-11 13:30:09 - PSTParser ended
+2016-04-11 13:35:21 - PSTParser started
+2016-04-11 13:35:21 - [Tom Cassidy] modules [], plugins [], sites []
+2016-04-11 13:35:21 - Processing parser.pst
+2016-04-11 13:35:28 - Sending 7 item to ElasticSearch
+2016-04-11 13:35:28 - PSTParser ended
+2016-04-11 13:36:20 - PSTParser started
+2016-04-11 13:36:20 - [Skullcrusher] modules [], plugins [], sites []
+2016-04-11 13:36:21 - Processing parser.pst
+2016-04-11 13:36:27 - Sending 7 item to ElasticSearch
+2016-04-11 13:36:27 - PSTParser ended
+2016-04-11 13:39:52 - PSTParser started
+2016-04-11 13:39:52 - [Iron Man 2020] modules [], plugins [], sites []
+2016-04-11 13:39:53 - Processing parser.pst
+2016-04-11 13:40:00 - Sending 7 item to ElasticSearch
+2016-04-11 13:40:00 - PSTParser ended
+2016-04-11 16:46:10 - PSTParser started
+2016-04-11 16:46:10 - [Metal Master] modules [], plugins [], sites []
+2016-04-11 16:46:11 - Processing parser.pst
+2016-04-11 16:46:17 - Sending 7 item to ElasticSearch
+2016-04-11 16:46:17 - PSTParser ended
