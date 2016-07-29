@@ -82,36 +82,37 @@ public class PSTParser {
 	}
 	
 	public void processFolder(File[] files) {
-		try {
+//		try {
 		    for (File file : files) {
 		        if (file.isDirectory()) {
 		        	logger.info("Directory: " + file.getName());
-//		        	if(file.getName().equals("20150501") || file.getName().equals("20150515")){
-//		        		logger.info("Skipping directory");
-//		        		continue;
-//		        	}
 		            processFolder(file.listFiles()); // Calls same method again.
 		        } else {
-		            pstFileName = file.getName();
-		            logger.info("Processing " + pstFileName);
-					PSTFile pstFile = new PSTFile(file.getAbsolutePath());
-					
-					bulkRequest = client.prepareBulk();
-					
-					processMailFolder(pstFile.getRootFolder());
-					
-					// Send to ES
-					if (bulkRequest.numberOfActions() > 0) {
-						logger.info("Sending " + bulkRequest.numberOfActions() + " item to ElasticSearch");
-						BulkResponse bulkResponse = bulkRequest.execute().actionGet();
-						if (bulkResponse.hasFailures())
-							logger.error(bulkResponse.buildFailureMessage());
-					}
+		        	try {
+			            pstFileName = file.getName();
+			            logger.info("Processing " + pstFileName);
+						PSTFile pstFile = new PSTFile(file.getAbsolutePath());
+						
+						bulkRequest = client.prepareBulk();
+						
+						processMailFolder(pstFile.getRootFolder());
+						
+						// Send to ES
+						if (bulkRequest.numberOfActions() > 0) {
+							logger.info("Sending " + bulkRequest.numberOfActions() + " item to ElasticSearch");
+							BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+							if (bulkResponse.hasFailures())
+								logger.error(bulkResponse.buildFailureMessage());
+						}
+		        	} catch (Exception err) {
+		        		logger.error("Error parsing " + pstFileName);
+		    			logger.error("Main loop exception", err);
+		    		}
 		        }
 		    }
-		} catch (Exception err) {
-			logger.error("Main loop exception", err);
-		}
+//		} catch (Exception err) {
+//			logger.error("Main loop exception", err);
+//		}
 	}
 
 	public void processMailFolder(PSTFolder folder) throws PSTException, java.io.IOException {
@@ -176,6 +177,8 @@ public class PSTParser {
 				emailSignature += email.getCreationTime();
 				emailSignature += email.getBody();
 				emailSignature += senderEmail;
+				
+				System.out.println(senderEmail + "            " + email.getSenderEmailAddress() + "           " + email.getPidTagRecipientSenderSMTPAddress());
 				
 				int numOfRecipients = email.getNumberOfRecipients();
 				for (int i=0; i<numOfRecipients; i++) {
@@ -334,7 +337,7 @@ public class PSTParser {
 		
 		logger.info("PSTParser started");
 //		new PSTParser("spectris", "bksv_china", "spectris.com.cn", "/home/josephyuen/Downloads/2014 Jan to Dec - final count 7812 emails/Messages/Sales employee jan to dec 8741_0001.pst", "/home/josephyuen/tmp", "Avaya", "batch1");
-//		new PSTParser("spectris", "bksv_china", "spectris.com.cn", "/home/josephyuen/Downloads/import/", "/home/josephyuen/tmp", "Avaya", "batch1");
+//		new PSTParser("zzzz", "zzzzz", "ndcccccccc", "/home/josephyuen/Downloads/NDCT/", "/home/josephyuen/tmp", "Avaya", "batch1");
 		new PSTParser(args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
 		logger.info("PSTParser ended");
 	}
